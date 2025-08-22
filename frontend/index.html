@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Emotion Recognition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="Home"></div>
+    <header>
+        <h1>Speech Emotion Recognition</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#Home">Home</a>
+                </li>
+                <li>
+                    <a href="#samples">Samples</a>
+                </li>
+                <li>
+                    <a href="#code">Code</a>
+                </li>
+                <li>
+                    <a href="#models">Model</a>
+                </li>
+                <li>
+                    <a href="#">Explaination</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="playsection">
+            <div class="container">
+                <div class="fileInputBox">
+                    <input type="file" id="fileInput">
+                </div>
+                <div class="instructionBox">
+                    <p>Please remove any kind of background noise or music before uploading for better results</p>
+                </div>
+                <button id="recognizeBtn">Recognize</button>
+            </div>
+        </section>
+        <section id="samples">
+            <h2>Samples</h2>
+            <div class="samplesBox">
+            </div>
+
+            <div class="instructionBox" style="width:fit-content ;">
+                <p>For more samples please refer to <a href="https://www.kaggle.com/datasets/ejlok1/toronto-emotional-speech-set-tess" target="_blank" style="color: rgb(255, 187, 0);">TEES dataset</a>.</p>
+            </div>
+
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

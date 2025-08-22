@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    color: white;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img{
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: black;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid rgb(68, 68, 68);
+}
+
+header nav {
+    width: 100%;
+}
+
+header nav ul {
+    width: 80%;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px auto;
+}
+
+#playsection {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#playsection .container {
+    width: 80%;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fileInputBox{
+    cursor: pointer;
+    width: 400px;
+    height: 250px;
+    border: 2px dashed white;
+    margin: auto;
+    border-radius: 7px;
+    background-image: url("media/cloud-arrow-up-solid-full.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.fileInputBox input{
+    display: none;
+}
+.instructionBox{
+    padding: 10px 25px;
+    background-color: rgba(255, 0, 0, 0.189);
+    border-radius: 10px;
+    margin: 20px;
+}
+#recognizeBtn{
+    margin: 30px;
+    background: black;
+    color: white;
+    border: 2px solid white;
+    border-radius: 7px;
+    padding: 8px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 400ms ease;
+    min-width: 150px;
+    text-align: center;
+}
+#recognizeBtn:hover{
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+}
+.glowButton {
+    animation: slowGlow 2s ease-in-out infinite;
+    transition: 300ms ease;
+    border-radius: 5px;
+}
+
+@keyframes slowGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.329);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.927);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.329);
+    }
+}
+#samples h2{
+    margin: 15px;
+    text-align: center;
+}
+.samplesBox{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 90%;
+}
+.audio-container {
+    padding: 20px 10px;
+    margin: 10px;
+    transition: 400ms ease-in-out;
+    width: 220px;
+    background-color: rgb(29, 29, 29);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 7px;
+}
+
+.audio-container .cover-art {
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    width: 125px;
+    height: 125px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.controls {
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.controls button {
+    background-color: transparent;
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    cursor: pointer;
+    border: none;
+}
+
+.controls button:hover {
+    transform: scale(1.05);
+    transition: 300ms ease-in-out;
+}
+
+.controls button img {
+    width: 100%;
+}
+
+.audio_download{
+    margin: auto;
+    background-color: #FF5D5D;
+    width: 80%;
+    border-radius: 7px;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
