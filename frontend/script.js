@@ -118,7 +118,7 @@ recognizeBtn.addEventListener("click", () => {
     file = fileInput.files[0]
     const formData = new FormData();
     formData.append("uploaded_file", file);
-    fetch('http://127.0.0.1:8000/predict', {
+    fetch('/predict', {
         method: "POST",
         body: formData
     })
