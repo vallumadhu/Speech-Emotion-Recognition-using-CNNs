@@ -1,47 +1,48 @@
 const fileInputBox = document.querySelector(".fileInputBox")
 const fileInput = document.getElementById("fileInput")
 const samplesBox = document.querySelector(".samplesBox")
+const predictionText = document.getElementById("predictionText")
 
 const sampleAudioUrls = {
-       0: {
+    0: {
         audio: "media/my god.wav",
         image: "media/acp.png"
     },
     1: {
-        audio: "media/shut up.mp3",
-        image: "media/shut_up.gif"
-    },
-    2: {
         audio: "media/Stop it! Clean_audio.wav",
         image: "media/stop_it_2.gif"
     },
-    3:{
+    2: {
         audio: "media/OAF_back_fear.wav",
         image: "media/fear_2.gif"
     },
-    4:{
+    3: {
         audio: "media/OAF_week_fear.wav",
         image: "media/fear.gif"
     },
-    5: {
+    4: {
         audio: "media/oaf_late_sad.wav",
         image: "media/sad.gif"
     },
-    6: {
+    5: {
         audio: "media/oaf_life_sad.wav",
         image: "media/sad_2.gif"
     },
-    7: {
+    6: {
         audio: "media/yaf_food_disgust.wav",
         image: "media/disgust.gif"
     },
-    8: {
+    7: {
         audio: "media/yaf_jail_ps.wav",
         image: "media/surprized.gif"
     },
-    9: {
+    8: {
         audio: "media/YAF_choice_sad.wav",
         image: "media/sad_2.gif"
+    },
+    9: {
+        audio: "media/OAF_week_fear.wav",
+        image: "media/fear.gif"
     }
 };
 
@@ -114,5 +115,23 @@ fileInput.addEventListener("change", (e) => {
 })
 
 recognizeBtn.addEventListener("click", () => {
-
+    file = fileInput.files[0]
+    const formData = new FormData();
+    formData.append("uploaded_file", file);
+    fetch('http://127.0.0.1:8000/predict', {
+        method: "POST",
+        body: formData
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.prediction){
+                predictionText.innerHTML = data.prediction
+            }else{
+                predictionText.innerHTML = "Something went wrong"
+            }
+            
+        })
+        .catch((error) => {
+            console.error("error",error)
+        });
 })

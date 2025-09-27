@@ -6,6 +6,9 @@
     color: white;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    outline: none;
+    -webkit-user-drag: none;
+    
 }
 
 img{
@@ -182,4 +185,11 @@ header nav ul {
     font-weight: bold;
     cursor: pointer;
     border: none;
+}
+
+#predictionText {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ebff00;
+    background-color: transparent;
 }
