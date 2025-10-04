@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi import UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import JSONResponse
 import librosa
 import matplotlib.pyplot as plt
 import numpy as np
@@ -20,6 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount("/media", StaticFiles(directory="../frontend/media"), name="media")
+app.mount("/frontend", StaticFiles(directory="../frontend"), name="frontend")
 
 labels = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise", "surprised"]
 model = tf.keras.models.load_model("./models/model_9982.h5")
@@ -54,27 +59,25 @@ def home():
 
 
 @app.post("/predict")
-async def predict(uploaded_file:UploadFile):
+async def predict(uploaded_file: UploadFile):
+    try:
+        audio_bytes = await uploaded_file.read()
+        audio_file = BytesIO(audio_bytes)
+        img_buf = audio_to_spectrogram(audio_file)
 
-    audio = await uploaded_file.read()
+        img = Image.open(img_buf).convert("RGB")
+        img_resized = img.resize((224,224))
+        np_img = np.array(img_resized)/255.0
+        np_img = np_img.reshape((1,224,224,3))
 
-    audio = BytesIO(audio)
+        output = model.predict(np_img)
+        pred_index = int(np.argmax(output))
+        prediction = labels[pred_index]
 
-    img_buf = audio_to_spectrogram(audio)
+        return JSONResponse({
+            "prediction": prediction,
+            "probabilities": output.tolist()
+        })
 
-    img = Image.open(img_buf).convert("RGB")
-
-    resized_img = img.resize((224,224))
-    np_img = np.array(resized_img)/255.0
-    np_img = np_img.reshape((1,224,224,3))
-    
-
-    output = model.predict(np_img)
-    prediction_index = int(np.argmax(output))
-    prediction = labels[prediction_index]
-
-
-    return {
-        "prediction": prediction,
-        "probabilities": output.tolist()
-    }
+    except Exception as e:
+        return JSONResponse({"error": str(e)})
