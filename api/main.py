@@ -11,6 +11,7 @@ from io import BytesIO
 import soundfile
 import tensorflow as tf
 from PIL import Image
+from pathlib import Path
 
 app = FastAPI()
 
@@ -23,11 +24,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/media", StaticFiles(directory="../frontend/media"), name="media")
-app.mount("/frontend", StaticFiles(directory="../frontend"), name="frontend")
+BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BASE_DIR.parent
+FRONTEND_MEDIA_DIR = PROJECT_ROOT / "frontend" / "media"
+FRONTEND_DIR = PROJECT_ROOT / "frontend"
+MODELS_PATH = PROJECT_ROOT / "models" / "model_9982.h5"
+
+
+app.mount("/media", StaticFiles(directory=str(FRONTEND_MEDIA_DIR)), name="media")
+app.mount("/frontend", StaticFiles(directory=str(FRONTEND_DIR)), name="frontend")
 
 labels = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surprise", "surprised"]
-model = tf.keras.models.load_model("./models/model_9982.h5")
+model = tf.keras.models.load_model(str(MODELS_PATH))
 
 def audio_to_spectrogram(bytes_file):
   
